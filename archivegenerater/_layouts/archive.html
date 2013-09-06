@@ -1,0 +1,23 @@
+---
+layout: default 
+---
+
+<h1>{{ page.title }}</h1>
+
+{% for post in page.posts %}
+
+	<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+	<p class="meta">
+		<span>{{ post.date | date_to_string }}</span>
+	</p>
+
+	<div class="post">
+		{{ post.excerpt }}
+	</div>
+
+	<a href="{{ post.url }}">Read more</a>
+	<div style="clear:both; float:none; height:0; overflow:hidden"></div>
+
+	<hr style="margin-top:5px;">
+
+{% endfor %}

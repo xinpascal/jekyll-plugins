@@ -1,0 +1,15 @@
+---
+layout: default 
+---
+
+	<h1>{{ page.category }}</h1>
+
+	<ul class="article-list">
+	{% for post in site.posts %}
+
+		{% if post.categories contains page.category %}
+		<li><span class="tm-date">{{ post.date | date_to_string }}</span> <a href="{{ post.url }}">{{ post.title }}</a></li>
+		{% endif %}
+
+	{% endfor %}
+	</ul>
