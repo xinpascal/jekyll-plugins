@@ -50,8 +50,18 @@ eos
           "<div class=\"unit golden-large terminal\">" \
             "<p class=\"title\">#{@title}</p>" \
             "<pre class=\"shell\">" 
+        iscmd = false
         super.strip.each_line do |line|
-          if line.start_with?("~", "/")
+          if iscmd
+            output += \
+              "<p class=\"line\">" \
+                "<span class=\"command\">#{line}</span>" 
+              "</p>"
+            iscmd = (line =~ /\\$/) 
+            next 
+          end 
+          iscmd = false
+          if line.start_with?("~", "/", "[")
             path, prompt, command = line.partition(/[$#]/)
             if prompt != ""
               output += \
@@ -67,6 +77,7 @@ eos
               output += \
                   "<span class=\"command\">#{command}</span>" \
                 "</p>"
+              iscmd = (line =~ /\\$/) 
             else
               output += \
                 "<p class=\"line\">" \
